@@ -36,6 +36,13 @@
   </head>
   <body>
     <div class="container-scroller">
+      <?php
+      $current_uri = $_SERVER['REQUEST_URI'];
+      $is_dashboard = strpos($current_uri, '/index.php') !== false;
+      $is_category = strpos($current_uri, '/category/') !== false;
+      $is_product = strpos($current_uri, '/Product/') !== false;
+      $is_orders = strpos($current_uri, '/orders/') !== false;
+      ?>
       <!-- partial:partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
@@ -95,27 +102,27 @@
           <li class="nav-item nav-category">
             <span class="nav-link">Navigation</span>
           </li>
-          <li class="nav-item menu-items">
-            <a class="nav-link" href="index.html">
+          <li class="nav-item menu-items <?php echo $is_dashboard ? 'active' : ''; ?>">
+            <a class="nav-link" href="/Corona Admin Panel/Admin/index.php">
               <span class="menu-icon">
                 <i class="mdi mdi-speedometer"></i>
               </span>
               <span class="menu-title">Dashboard</span>
             </a>
           </li>
-          <li class="nav-item menu-items">
-            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+          <li class="nav-item menu-items <?php echo $is_category ? 'active' : ''; ?>">
+            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="<?php echo $is_category ? 'true' : 'false'; ?>" aria-controls="ui-basic">
               <span class="menu-icon">
                 <i class="mdi mdi-laptop"></i>
               </span>
               <span class="menu-title">Category</span>
               <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="ui-basic">
+            <div class="collapse <?php echo $is_category ? 'show' : ''; ?>" id="ui-basic">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="/Corona Admin Panel/Admin/category/add_category.php">Add Category</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/Corona Admin Panel/Admin/category/view_category.php">View Category</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
+                
               </ul>
             </div>
           </li>
@@ -143,7 +150,7 @@
               <span class="menu-title">Charts</span>
             </a>
           </li>
-          <li class="nav-item menu-items">
+          <li class="nav-item menu-items <?php echo $is_orders ? 'active' : ''; ?>">
             <a class="nav-link" href="/Corona Admin Panel/Admin/orders/orders.php">
               <span class="menu-icon">
                 <i class="mdi mdi-contacts"></i>
@@ -151,15 +158,15 @@
               <span class="menu-title">Orders</span>
             </a>
           </li>
-          <li class="nav-item menu-items">
-            <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+          <li class="nav-item menu-items <?php echo $is_product ? 'active' : ''; ?>">
+            <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="<?php echo $is_product ? 'true' : 'false'; ?>" aria-controls="auth">
               <span class="menu-icon">
                 <i class="mdi mdi-security"></i>
               </span>
               <span class="menu-title">Product</span>
               <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="auth">
+            <div class="collapse <?php echo $is_product ? 'show' : ''; ?>" id="auth">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.html"> Blank Page </a></li>
                 <li class="nav-item"> <a class="nav-link" href="/Corona Admin Panel/Admin/Product/add_product.php"> Add Product </a></li>
